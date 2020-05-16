@@ -1,0 +1,7 @@
+rootProject.name = 'adApp'
+apply from: file("../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesSettingsGradle(settings)
+include ':app'
+include ':react-native-datetimepicker'
+project(':react-native-datetimepicker').projectDir = new File(rootProject.projectDir, '../node_modules/@react-native-community/datetimepicker/android')
+include ':@0x5e_react-native-alipay'
+project(':@0x5e_react-native-alipay').projectDir = new File(rootProject.projectDir, '../node_modules/@0x5e/react-native-alipay/android')

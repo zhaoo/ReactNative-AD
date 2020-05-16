@@ -1,0 +1,53 @@
+{
+  "name": "adApp",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "android": "react-native run-android",
+    "ios": "react-native run-ios",
+    "start": "react-native start",
+    "test": "jest",
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "@0x5e/react-native-alipay": "^0.2.6",
+    "@react-native-community/datetimepicker": "^2.1.0",
+    "axios": "^0.19.0",
+    "babel-plugin-root-import": "^6.4.1",
+    "query-string": "^6.12.1",
+    "react": "16.9.0",
+    "react-native": "0.61.2",
+    "react-native-action-button": "^2.8.5",
+    "react-native-app-intro-slider": "^3.0.0",
+    "react-native-baidu-map": "^1.0.26",
+    "react-native-dialog-input": "^1.0.7",
+    "react-native-elements": "^1.2.7",
+    "react-native-gesture-handler": "^1.4.1",
+    "react-native-htmlview": "^0.15.0",
+    "react-native-image-crop-picker": "^0.26.2",
+    "react-native-reanimated": "^1.3.0",
+    "react-native-screens": "^1.0.0-alpha.23",
+    "react-native-swiper": "^1.6.0-nightly.5",
+    "react-native-vector-icons": "^6.6.0",
+    "react-navigation": "^4.0.10",
+    "react-navigation-stack": "^1.9.4",
+    "react-navigation-tabs": "^2.5.6",
+    "react-redux": "^7.1.1",
+    "redux": "^4.0.4",
+    "redux-thunk": "^2.3.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.6.3",
+    "@babel/runtime": "^7.6.3",
+    "@react-native-community/eslint-config": "^0.0.5",
+    "babel-jest": "^24.9.0",
+    "eslint": "^6.5.1",
+    "jest": "^24.9.0",
+    "metro-react-native-babel-preset": "^0.56.0",
+    "moment": "^2.25.3",
+    "react-test-renderer": "16.9.0"
+  },
+  "jest": {
+    "preset": "react-native"
+  }
+}
