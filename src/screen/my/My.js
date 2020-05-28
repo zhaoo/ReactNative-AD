@@ -5,6 +5,7 @@ import {connect} from 'react-redux';
 import NavBar from '~/component/NavBar';
 import {parseRole, parseUser} from '~/utils/parse';
 import {getOrderList} from '~/api/order';
+import {authInfo} from '~/api/user';
 
 class My extends Component {
   constructor(props) {
@@ -12,18 +13,29 @@ class My extends Component {
     this.state = {
       user: {},
       orderTotal: 0,
+      isAuth: false,
     };
   }
 
+  componentDidMount = async () => {
+    if (this.props.token) {
+      this.getData();
+    }
+  };
+
   UNSAFE_componentWillReceiveProps = async nextProps => {
     if (nextProps.token) {
-      const list = await getOrderList();
-      this.setState({
-        orderTotal: list.data.total,
-      });
-    } else {
-      this.setState({orderTotal: 0});
+      this.getData();
     }
+  };
+
+  getData = async () => {
+    const list = await getOrderList();
+    const auth = await authInfo();
+    this.setState({
+      orderTotal: list.data.total,
+      isAuth: auth.data.status,
+    });
   };
 
   renderUserInfo = () => {
@@ -72,6 +84,7 @@ class My extends Component {
 
   renderListItem = () => {
     const {user} = this.props;
+    const {isAuth} = this.state;
     return (
       <View>
         <ListItem
@@ -84,37 +97,43 @@ class My extends Component {
             this.props.navigation.navigate('OrderList');
           }}
         />
-        <ListItem
-          title={'我的钱包'}
-          leftIcon={{name: 'credit-card'}}
-          bottomDivider
-          chevron
-          onPress={() => {
-            this.props.navigation.navigate('Wallet');
-          }}
-        />
-        <ListItem
-          title={'实名认证'}
-          leftIcon={{name: 'verified-user'}}
-          rightTitle={parseUser(user.status)}
-          bottomDivider
-          chevron
-          onPress={() =>
-            this.props.navigation.navigate('Authentication', {
-              realname: user.realname,
-              idCard: user.idCard,
-              status: user.status,
-            })
-          }
-        />
-        <ListItem
-          title={'绑定支付'}
-          leftIcon={{name: 'alipay-square', type: 'antdesign'}}
-          rightTitle={'已绑定'}
-          bottomDivider
-          chevron
-          onPress={() => this.props.navigation.navigate('AlipayAuth')}
-        />
+        {user && (
+          <ListItem
+            title={'我的钱包'}
+            leftIcon={{name: 'credit-card'}}
+            bottomDivider
+            chevron
+            onPress={() => {
+              this.props.navigation.navigate('Wallet');
+            }}
+          />
+        )}
+        {user && (
+          <ListItem
+            title={'实名认证'}
+            leftIcon={{name: 'verified-user'}}
+            rightTitle={parseUser(user.status)}
+            bottomDivider
+            chevron
+            onPress={() =>
+              this.props.navigation.navigate('Authentication', {
+                realname: user.realname,
+                idCard: user.idCard,
+                status: user.status,
+              })
+            }
+          />
+        )}
+        {user && (
+          <ListItem
+            title={'绑定支付'}
+            leftIcon={{name: 'alipay-square', type: 'antdesign'}}
+            rightTitle={isAuth ? '已绑定' : '未绑定'}
+            bottomDivider
+            chevron
+            onPress={() => this.props.navigation.navigate('AlipayAuth')}
+          />
+        )}
         <ListItem
           title={'系统设置'}
           leftIcon={{name: 'build'}}
@@ -126,7 +145,7 @@ class My extends Component {
     );
   };
 
-  render = () => {
+  render() {
     return (
       <View>
         <NavBar title="我的" />
@@ -134,7 +153,7 @@ class My extends Component {
         {this.renderListItem()}
       </View>
     );
-  };
+  }
 }
 
 const mapStateToProps = state => {

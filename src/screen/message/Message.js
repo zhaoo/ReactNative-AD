@@ -32,7 +32,13 @@ export default class Message extends Component {
   };
 
   renderNavNar() {
-    return <NavBar title="消息" />;
+    return (
+      <NavBar
+        title={'系统消息'}
+        leftIcon="arrow-back"
+        leftPress={() => this.props.navigation.goBack()}
+      />
+    );
   }
 
   renderActivityList() {

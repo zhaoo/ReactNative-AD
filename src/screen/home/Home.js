@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {View, StyleSheet, Dimensions, Image} from 'react-native';
+import {Icon, Text} from 'react-native-elements';
 import Swiper from 'react-native-swiper';
 import NavBar from '~/component/NavBar';
 import {getShuffingList} from '~/api/home';
@@ -11,7 +12,6 @@ export default class Home extends Component {
     super(props);
     this.state = {
       shuffingList: [],
-      activityList: [],
       refreshing: false,
       loading: false,
     };
@@ -50,11 +50,89 @@ export default class Home extends Component {
     );
   }
 
+  renderMenu() {
+    return (
+      <View style={styles.menuContainer}>
+        <View style={styles.menuRow}>
+          <View style={styles.menuItem}>
+            <Icon
+              reverse
+              name="send"
+              color="#E6A23C"
+              onPress={() => {
+                this.props.navigation.navigate('Publish');
+              }}
+            />
+            <Text>广告发布</Text>
+          </View>
+          <View style={styles.menuItem}>
+            <Icon
+              reverse
+              name="card-travel"
+              color="#409EFF"
+              onPress={() => {
+                this.props.navigation.navigate('OrderList');
+              }}
+            />
+            <Text>我的订单</Text>
+          </View>
+          <View style={styles.menuItem}>
+            <Icon
+              reverse
+              name="directions-car"
+              color="#F56C6C"
+              onPress={() => {
+                this.props.navigation.navigate('EquipmentList');
+              }}
+            />
+            <Text>我的设备</Text>
+          </View>
+        </View>
+        <View style={styles.menuRow}>
+          <View style={styles.menuItem}>
+            <Icon
+              reverse
+              name="credit-card"
+              color="#67C23A"
+              onPress={() => {
+                this.props.navigation.navigate('Wallet');
+              }}
+            />
+            <Text>我的钱包</Text>
+          </View>
+          <View style={styles.menuItem}>
+            <Icon
+              reverse
+              name="pie-chart"
+              color="#ff8c31"
+              onPress={() => {
+                this.props.navigation.navigate('PlanList');
+              }}
+            />
+            <Text>广告统计</Text>
+          </View>
+          <View style={styles.menuItem}>
+            <Icon
+              reverse
+              name="message"
+              color="#517fa4"
+              onPress={() => {
+                this.props.navigation.navigate('Message');
+              }}
+            />
+            <Text>系统消息</Text>
+          </View>
+        </View>
+      </View>
+    );
+  }
+
   render() {
     return (
       <View style={styles.container}>
         {this.renderNavNar()}
         {this.renderShuffing()}
+        {this.renderMenu()}
       </View>
     );
   }
@@ -71,5 +149,19 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: '#f0f3f6',
     height: height - 49,
+  },
+  menuContainer: {
+    margin: 10,
+    padding: 10,
+    backgroundColor: '#ffffff',
+  },
+  menuRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    marginTop: 10,
+    marginBottom: 10,
+  },
+  menuItem: {
+    alignItems: 'center',
   },
 });

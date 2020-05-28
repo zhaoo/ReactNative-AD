@@ -41,7 +41,6 @@ export default class Pay extends Component {
     const {orderId} = this.state;
     const signRes = await payNotify(orderId);
     const {sign} = signRes.data;
-    console.log('==========>' + sign);
     if (sign) {
       Alipay.setAlipaySandbox(true);
       const payRes = await Alipay.pay(sign);

@@ -1840,6 +1840,6 @@ public final class R {
     public static final class xml {
         private xml() {}
 
-        public static final int rn_dev_preferences = 0x7f100002;
+        public static final int rn_dev_preferences = 0x7f100003;
     }
 }

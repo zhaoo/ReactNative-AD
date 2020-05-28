@@ -13,6 +13,7 @@ MERGED from [:react-native-image-crop-picker] /Users/zhaoo/Desktop/project/ad/ad
 MERGED from [:react-native-reanimated] /Users/zhaoo/Desktop/project/ad/adApp/node_modules/react-native-reanimated/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-11:12
 MERGED from [:react-native-screens] /Users/zhaoo/Desktop/project/ad/adApp/node_modules/react-native-screens/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-11:12
 MERGED from [:react-native-vector-icons] /Users/zhaoo/Desktop/project/ad/adApp/node_modules/react-native-vector-icons/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-11:12
+MERGED from [:react-native-webview] /Users/zhaoo/Desktop/project/ad/adApp/node_modules/react-native-webview/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-23:12
 MERGED from [com.facebook.react:react-native:0.61.2] /Users/zhaoo/.gradle/caches/transforms-2/files-2.1/385b630fa3753007b39d83e5328575b5/AndroidManifest.xml:2:1-13:12
 MERGED from [com.github.yalantis:ucrop:2.2.2-native] /Users/zhaoo/.gradle/caches/transforms-2/files-2.1/a61f42dcc81853fdf653f0e8370c2429/AndroidManifest.xml:2:1-11:12
 MERGED from [androidx.appcompat:appcompat:1.1.0-rc01] /Users/zhaoo/.gradle/caches/transforms-2/files-2.1/37a6ef83210741d519b846c4e130a1ce/AndroidManifest.xml:17:1-24:12
@@ -147,6 +148,8 @@ MERGED from [:@react-native-community_datetimepicker] /Users/zhaoo/Desktop/proje
 MERGED from [:@react-native-community_datetimepicker] /Users/zhaoo/Desktop/project/ad/adApp/node_modules/@react-native-community/datetimepicker/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:11:5-20
 MERGED from [:react-native-image-crop-picker] /Users/zhaoo/Desktop/project/ad/adApp/node_modules/react-native-image-crop-picker/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:12:5-26:19
 MERGED from [:react-native-image-crop-picker] /Users/zhaoo/Desktop/project/ad/adApp/node_modules/react-native-image-crop-picker/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:12:5-26:19
+MERGED from [:react-native-webview] /Users/zhaoo/Desktop/project/ad/adApp/node_modules/react-native-webview/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:11:5-21:19
+MERGED from [:react-native-webview] /Users/zhaoo/Desktop/project/ad/adApp/node_modules/react-native-webview/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:11:5-21:19
 MERGED from [com.facebook.react:react-native:0.61.2] /Users/zhaoo/.gradle/caches/transforms-2/files-2.1/385b630fa3753007b39d83e5328575b5/AndroidManifest.xml:11:5-20
 MERGED from [com.facebook.react:react-native:0.61.2] /Users/zhaoo/.gradle/caches/transforms-2/files-2.1/385b630fa3753007b39d83e5328575b5/AndroidManifest.xml:11:5-20
 MERGED from [:react-native-baidu-map] /Users/zhaoo/Desktop/project/ad/adApp/node_modules/react-native-baidu-map/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:11:5-17:19
@@ -238,6 +241,8 @@ MERGED from [:react-native-screens] /Users/zhaoo/Desktop/project/ad/adApp/node_m
 MERGED from [:react-native-screens] /Users/zhaoo/Desktop/project/ad/adApp/node_modules/react-native-screens/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
 MERGED from [:react-native-vector-icons] /Users/zhaoo/Desktop/project/ad/adApp/node_modules/react-native-vector-icons/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
 MERGED from [:react-native-vector-icons] /Users/zhaoo/Desktop/project/ad/adApp/node_modules/react-native-vector-icons/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
+MERGED from [:react-native-webview] /Users/zhaoo/Desktop/project/ad/adApp/node_modules/react-native-webview/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
+MERGED from [:react-native-webview] /Users/zhaoo/Desktop/project/ad/adApp/node_modules/react-native-webview/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
 MERGED from [com.facebook.react:react-native:0.61.2] /Users/zhaoo/.gradle/caches/transforms-2/files-2.1/385b630fa3753007b39d83e5328575b5/AndroidManifest.xml:7:5-9:41
 MERGED from [com.facebook.react:react-native:0.61.2] /Users/zhaoo/.gradle/caches/transforms-2/files-2.1/385b630fa3753007b39d83e5328575b5/AndroidManifest.xml:7:5-9:41
 MERGED from [com.github.yalantis:ucrop:2.2.2-native] /Users/zhaoo/.gradle/caches/transforms-2/files-2.1/a61f42dcc81853fdf653f0e8370c2429/AndroidManifest.xml:7:5-9:41
@@ -342,6 +347,16 @@ ADDED from [:react-native-image-crop-picker] /Users/zhaoo/Desktop/project/ad/adA
 		ADDED from [:react-native-image-crop-picker] /Users/zhaoo/Desktop/project/ad/adApp/node_modules/react-native-image-crop-picker/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:25:13-69
 	android:name
 		ADDED from [:react-native-image-crop-picker] /Users/zhaoo/Desktop/project/ad/adApp/node_modules/react-native-image-crop-picker/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:24:13-60
+provider#com.reactnativecommunity.webview.RNCWebViewFileProvider
+ADDED from [:react-native-webview] /Users/zhaoo/Desktop/project/ad/adApp/node_modules/react-native-webview/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:12:9-20:20
+	android:grantUriPermissions
+		ADDED from [:react-native-webview] /Users/zhaoo/Desktop/project/ad/adApp/node_modules/react-native-webview/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:16:13-47
+	android:authorities
+		ADDED from [:react-native-webview] /Users/zhaoo/Desktop/project/ad/adApp/node_modules/react-native-webview/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:14:13-64
+	android:exported
+		ADDED from [:react-native-webview] /Users/zhaoo/Desktop/project/ad/adApp/node_modules/react-native-webview/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:15:13-37
+	android:name
+		ADDED from [:react-native-webview] /Users/zhaoo/Desktop/project/ad/adApp/node_modules/react-native-webview/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:13:13-83
 service#com.baidu.location.f
 ADDED from [:react-native-baidu-map] /Users/zhaoo/Desktop/project/ad/adApp/node_modules/react-native-baidu-map/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:12:9-16:19
 	android:process

@@ -12868,8 +12868,9 @@ public final class R {
     public static final int ucrop_UCropView_ucrop_show_oval_crop_frame=12;
   }
   public static final class xml {
-    public static final int network_security_config=0x7f110000;
-    public static final int provider_paths=0x7f110001;
-    public static final int rn_dev_preferences=0x7f110002;
+    public static final int file_provider_paths=0x7f110000;
+    public static final int network_security_config=0x7f110001;
+    public static final int provider_paths=0x7f110002;
+    public static final int rn_dev_preferences=0x7f110003;
   }
 }

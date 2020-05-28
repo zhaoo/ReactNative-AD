@@ -1,33 +1,59 @@
 import React, {Component} from 'react';
-import {View, Dimensions, StyleSheet, ToastAndroid} from 'react-native';
-import {Button} from 'react-native-elements';
+import {View, Dimensions, StyleSheet, ToastAndroid, Alert} from 'react-native';
+import {Button, ListItem} from 'react-native-elements';
 import NavBar from '~/component/NavBar';
 import Alipay from '@0x5e/react-native-alipay';
-import QueryString from 'query-string';
-import {sign} from '~/api/auth';
+import {alipayAuth, authInfo} from '~/api/user';
+import {parseTime} from '~/utils/parse';
 
 export default class AlipayAuth extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      info: {
+        alipayId: undefined,
+        status: false,
+        bindTime: undefined,
+      },
+    };
   }
 
-  onAuth = async () => {
-    try {
-      // const signRes = await sign();
-      // const signStr = signRes.data.sign;
-      const signStr =
-        'apiname=com.alipay.account.auth&app_id=2016101800712719&app_name=mc&auth_type=AUTHACCOUNT&biz_type=openservice&method=alipay.open.auth.sdk.code.get&pid=2088102180079633&product_id=APP_FAST_LOGIN&scope=kuaijie&sign_type=RSA&target_id=20170516113800037&sign=Ef1X6rBUhJ5GAEYs6I4Bms0l6yDadVjWDjPfbM3nzAT%2FbfRBxg13SioWy2njWZJ4kc2yAe20UYxY1UX1nlqsQAKC7grImv5xaHyhX17XzMQRjw%2BINQ9SzNPo7I3XTYyAGUE9q7gfq32bcDgGRbMVKhr1s3bjkKr%2BDfu%2Fo6fmM5%2FtJ3hozHP99j7H3vtLABDof8ZqMsdIOOHFvPIlF%2FhyjGWU68rprcRpWzdFOJbhXc39SYD7O7HBbEWo0XS05DFnMrO1mtMPMr777qa2IXCiw1PLs0K74yAeX2n6PupK8XTO5nA3UojNNMMvdpiLqzn09APpCO4%2BusiTmlYWbzFXCA%3D%3D';
-      console.log('========>' + signStr);
-      const res = await Alipay.authWithInfo(signStr);
-      console.log('=========>' + res);
-      let {result} = res;
-      let {success, result_code, auth_code, user_id} = QueryString.parse(
-        result,
-      );
-    } catch (error) {
-      console.error(error);
+  componentDidMount = () => {
+    this.getData();
+  };
+
+  getData = async () => {
+    const res = await authInfo();
+    if (res.code === 20000) {
+      this.setState({info: res.data});
     }
+  };
+
+  onAuth = () => {
+    Alert.alert(
+      '绑定支付宝',
+      '您需要支付一分钱以验证支付宝账户',
+      [
+        {
+          text: '取消',
+          onPress: () => ToastAndroid.show('用户取消绑定', ToastAndroid.SHORT),
+          style: 'cancel',
+        },
+        {
+          text: '确定',
+          onPress: async () => {
+            const signRes = await alipayAuth();
+            const {sign} = signRes.data;
+            if (sign) {
+              Alipay.setAlipaySandbox(true);
+              const payRes = await Alipay.pay(sign);
+              ToastAndroid.show(payRes.memo, ToastAndroid.SHORT);
+            }
+          },
+        },
+      ],
+      {cancelable: false},
+    );
   };
 
   renderNavBar() {
@@ -40,7 +66,36 @@ export default class AlipayAuth extends Component {
     );
   }
 
-  renderForm() {
+  renderInfo() {
+    const {info} = this.state;
+    return (
+      <View>
+        <ListItem
+          title={'绑定状态'}
+          leftIcon={{name: 'check-circle'}}
+          rightTitle={info.status ? '已绑定' : '未绑定'}
+          bottomDivider
+          chevron
+        />
+        <ListItem
+          title={'支付宝ID'}
+          leftIcon={{name: 'fingerprint'}}
+          rightTitle={info.alipayId}
+          bottomDivider
+          chevron
+        />
+        <ListItem
+          title={'绑定时间'}
+          leftIcon={{name: 'access-time'}}
+          rightTitle={parseTime(info.bindTime, '{y}-{m}-{d}')}
+          bottomDivider
+          chevron
+        />
+      </View>
+    );
+  }
+
+  renderButton() {
     return (
       <View>
         <Button
@@ -61,7 +116,8 @@ export default class AlipayAuth extends Component {
     return (
       <View style={styles.container}>
         {this.renderNavBar()}
-        {this.renderForm()}
+        {this.renderInfo()}
+        {this.renderButton()}
       </View>
     );
   }

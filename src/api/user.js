@@ -23,6 +23,7 @@ export function logout() {
   return request({
     url: '/user/logout',
     method: 'post',
+    data: {},
   });
 }
 
@@ -63,5 +64,20 @@ export function sendSmsCode(data) {
     url: '/code/register',
     method: 'post',
     data,
+  });
+}
+
+export function alipayAuth() {
+  return request({
+    url: '/auth/alipay',
+    method: 'post',
+    data: {},
+  });
+}
+
+export function authInfo() {
+  return request({
+    url: '/auth/info',
+    method: 'get',
   });
 }

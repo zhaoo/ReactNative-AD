@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {View, StyleSheet, ScrollView, Dimensions} from 'react-native';
-import {ListItem} from 'react-native-elements';
+import {ListItem, Overlay, Text} from 'react-native-elements';
 import NavBar from '~/component/NavBar';
 import Card from '~/component/Card';
 import {parseTime} from '~/utils/parse';
@@ -11,8 +11,11 @@ export default class Order extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      order: {},
+      order: {
+        valueList: [],
+      },
       orderId: this.props.navigation.getParam('orderId'),
+      showText: false,
     };
   }
 
@@ -37,21 +40,40 @@ export default class Order extends Component {
   }
 
   renderOrderContent() {
-    const {order} = this.state;
+    const {order, showText} = this.state;
     return (
-      <Card title="广告信息">
-        <ListItem
-          title="广告单价"
-          bottomDivider
-          rightTitle={'¥ ' + order.price}
-        />
-        <ListItem
-          title="广告数量"
-          bottomDivider
-          rightTitle={order.num + ' 条'}
-        />
-        <ListItem title="播放频率" rightTitle={order.rate + ' 分钟/条'} />
-      </Card>
+      <View>
+        <Card title="广告信息">
+          <ListItem
+            title="广告内容"
+            bottomDivider
+            rightTitle={order.valueList[0]}
+            onPress={() => {
+              this.setState({showText: !showText});
+            }}
+          />
+          <ListItem
+            title="广告单价"
+            bottomDivider
+            rightTitle={'¥ ' + order.price}
+          />
+          <ListItem
+            title="广告数量"
+            bottomDivider
+            rightTitle={order.num + ' 条'}
+          />
+          <ListItem title="播放频率" rightTitle={order.rate + ' 分钟/条'} />
+        </Card>
+        <Overlay
+          isVisible={showText}
+          onBackdropPress={() => {
+            this.setState({showText: !showText});
+          }}>
+          {order.valueList.map(item => {
+            return <Text>item</Text>;
+          })}
+        </Overlay>
+      </View>
     );
   }
 

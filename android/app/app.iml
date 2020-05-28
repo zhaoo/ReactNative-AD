@@ -134,14 +134,15 @@
     <orderEntry type="library" name="Gradle: com.facebook.fresco:imagepipeline-okhttp3:2.0.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: org.webkit:android-jsc:r245459@aar" level="project" />
     <orderEntry type="library" name="Gradle: :alipaySdk-15.5.9-20181123210601:@aar" level="project" />
-    <orderEntry type="module" module-name="android-@0x5e_react-native-alipay" />
-    <orderEntry type="module" module-name="android-react-native-datetimepicker" />
-    <orderEntry type="module" module-name="android-@react-native-community_datetimepicker" />
-    <orderEntry type="module" module-name="android-react-native-baidu-map" />
-    <orderEntry type="module" module-name="android-react-native-gesture-handler" />
-    <orderEntry type="module" module-name="android-react-native-image-crop-picker" />
-    <orderEntry type="module" module-name="android-react-native-reanimated" />
-    <orderEntry type="module" module-name="android-react-native-screens" />
-    <orderEntry type="module" module-name="android-react-native-vector-icons" />
+    <orderEntry type="module" module-name="react-native-alipay-android-@0x5e_react-native-alipay" />
+    <orderEntry type="module" module-name="datetimepicker-android-react-native-datetimepicker" />
+    <orderEntry type="module" module-name="datetimepicker-android-@react-native-community_datetimepicker" />
+    <orderEntry type="module" module-name="react-native-baidu-map-android-react-native-baidu-map" />
+    <orderEntry type="module" module-name="react-native-gesture-handler-android-react-native-gesture-handler" />
+    <orderEntry type="module" module-name="react-native-image-crop-picker-android-react-native-image-crop-picker" />
+    <orderEntry type="module" module-name="react-native-reanimated-android-react-native-reanimated" />
+    <orderEntry type="module" module-name="react-native-screens-android-react-native-screens" />
+    <orderEntry type="module" module-name="react-native-vector-icons-android-react-native-vector-icons" />
+    <orderEntry type="module" module-name="react-native-webview" />
   </component>
 </module>

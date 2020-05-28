@@ -10,6 +10,7 @@ export default class OrderList extends Component {
     super(props);
     this.state = {
       list: [],
+      refreshing: false,
     };
   }
 
@@ -18,8 +19,12 @@ export default class OrderList extends Component {
   }
 
   getList = async () => {
-    const res = await getOrderList();
+    const res = await getOrderList({page: 1, limit: 10});
     this.setState({list: res.data.items});
+  };
+
+  onRefresh = async () => {
+    this.getList();
   };
 
   renderNavBar() {
@@ -35,16 +40,19 @@ export default class OrderList extends Component {
   }
 
   renderList() {
-    const {list} = this.state;
+    const {list, refreshing} = this.state;
     return (
       <FlatList
         data={list}
         keyExtractor={(item, index) => index.toString()}
+        refreshing={refreshing}
+        onRefresh={() => {
+          this.onRefresh();
+        }}
         renderItem={({item, index}) => (
           <ListItem
-            title={''}
             leftIcon={{name: 'work'}}
-            title={item.valueList.length > 0 ? item.valueList[0] : '无内容'} //最后删除判断
+            title={item.valueList[0]}
             subtitle={parseTime(item.createTime, '{y}-{m}-{d} {h}:{m}')}
             rightElement={
               <Badge

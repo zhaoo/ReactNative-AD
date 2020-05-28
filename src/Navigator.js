@@ -11,7 +11,7 @@ import Login from '~/screen/login/Login';
 import Register from '~/screen/login/Register';
 import SmsLogin from '~/screen/login/SmsLogin';
 import Home from '~/screen/home/Home';
-import Activity from '~/screen/home/Activity';
+import Activity from '~/screen/message/Activity';
 import My from '~/screen/my/My';
 import Setting from '~/screen/my/Setting';
 import Profile from '~/screen/profile/Profile';
@@ -25,6 +25,7 @@ import Authentication from '~/screen/my/Authentication';
 import Message from '~/screen/message/Message';
 import Wallet from '~/screen/wallet/Wallet';
 import AlipayAuth from '~/screen/my/AlipayAuth';
+import PlanList from '~/screen/plan/PlanList';
 
 import EquipmentScreen from './screen/equipment/EquipmentScreen';
 import AddEquipmentScreen from './screen/equipment/AddEquipmentScreen';
@@ -42,15 +43,15 @@ const BottomTabNavigator = createBottomTabNavigator({
       ),
     },
   },
-  Equipment: {
-    screen: EquipmentScreen,
-    navigationOptions: {
-      tabBarLabel: '设备',
-      tabBarIcon: ({tintColor, focused}) => (
-        <Icon name="devices" size={20} color={tintColor} />
-      ),
-    },
-  },
+  // Equipment: {
+  //   screen: EquipmentScreen,
+  //   navigationOptions: {
+  //     tabBarLabel: '设备',
+  //     tabBarIcon: ({tintColor, focused}) => (
+  //       <Icon name="devices" size={20} color={tintColor} />
+  //     ),
+  //   },
+  // },
   Publish: {
     screen: Publish,
     navigationOptions: {
@@ -60,15 +61,15 @@ const BottomTabNavigator = createBottomTabNavigator({
       ),
     },
   },
-  Message: {
-    screen: Message,
-    navigationOptions: {
-      tabBarLabel: '消息',
-      tabBarIcon: ({tintColor, focused}) => (
-        <Icon name="message" size={20} color={tintColor} />
-      ),
-    },
-  },
+  // Message: {
+  //   screen: Message,
+  //   navigationOptions: {
+  //     tabBarLabel: '消息',
+  //     tabBarIcon: ({tintColor, focused}) => (
+  //       <Icon name="message" size={20} color={tintColor} />
+  //     ),
+  //   },
+  // },
   My: {
     screen: My,
     navigationOptions: {
@@ -99,6 +100,8 @@ const StackNavigator = createStackNavigator(
     Authentication: Authentication,
     Wallet: Wallet,
     AlipayAuth: AlipayAuth,
+    Message: Message,
+    PlanList: PlanList,
 
     AddEquipment: AddEquipmentScreen,
     EquipmentDetail: EquipmentDetailScreen,

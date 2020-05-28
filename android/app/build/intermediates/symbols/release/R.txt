@@ -2064,6 +2064,7 @@ int styleable ucrop_UCropView_ucrop_grid_stroke_size 9
 int styleable ucrop_UCropView_ucrop_show_frame 10
 int styleable ucrop_UCropView_ucrop_show_grid 11
 int styleable ucrop_UCropView_ucrop_show_oval_crop_frame 12
-int xml network_security_config 0x7f110000
-int xml provider_paths 0x7f110001
-int xml rn_dev_preferences 0x7f110002
+int xml file_provider_paths 0x7f110000
+int xml network_security_config 0x7f110001
+int xml provider_paths 0x7f110002
+int xml rn_dev_preferences 0x7f110003
