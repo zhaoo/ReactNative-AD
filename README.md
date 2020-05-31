@@ -1,6 +1,6 @@
 # adApp
 
-共享车载屏汽车广告投放系统
+共享车载屏汽车广告投放系统（客户端，基于 RN 开发）
 
 [后端链接](https://github.com/wezhyn/ad-launch)
 
