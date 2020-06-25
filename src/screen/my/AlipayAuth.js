@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
-import {View, Dimensions, StyleSheet, ToastAndroid, Alert} from 'react-native';
+import {View, StyleSheet, ToastAndroid, Alert} from 'react-native';
 import {Button, ListItem} from 'react-native-elements';
 import NavBar from '~/component/NavBar';
 import Alipay from '@0x5e/react-native-alipay';
 import {alipayAuth, authInfo} from '~/api/user';
 import {parseTime} from '~/utils/parse';
+import {realHeight} from '~/utils/height';
 
 export default class AlipayAuth extends Component {
   constructor(props) {
@@ -126,7 +127,7 @@ export default class AlipayAuth extends Component {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#f0f3f6',
-    height: Dimensions.get('window').height,
+    height: realHeight,
   },
   btn: {
     marginTop: 20,

@@ -6,6 +6,7 @@ import Card from '~/component/Card';
 import {parseTime} from '~/utils/parse';
 import OrderBotton from './component/OrderButton';
 import {getOrder} from '~/api/order';
+import {realHeight} from '~/utils/height';
 
 export default class Order extends Component {
   constructor(props) {
@@ -120,7 +121,7 @@ export default class Order extends Component {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#f0f3f6',
-    height: Dimensions.get('window').height,
+    height: realHeight,
   },
   bottom: {
     height: 50,

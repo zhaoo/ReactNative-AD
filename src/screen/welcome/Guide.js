@@ -3,6 +3,7 @@ import {View, StyleSheet, Dimensions, AsyncStorage} from 'react-native';
 import {Image} from 'react-native-elements';
 import Slider from 'react-native-app-intro-slider';
 import {getGuideList} from '~/api/welcome';
+import {realHeight} from '~/utils/height';
 
 export default class Guide extends Component {
   constructor(props) {
@@ -57,6 +58,6 @@ export default class Guide extends Component {
 const styles = StyleSheet.create({
   image: {
     width: Dimensions.get('window').width,
-    height: Dimensions.get('window').height,
+    height: realHeight,
   },
 });

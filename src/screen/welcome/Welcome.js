@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {View, Text, StyleSheet, Dimensions} from 'react-native';
 import {Image} from 'react-native-elements';
 import {getWelcome} from '~/api/welcome';
+import {realHeight} from '~/utils/height';
 
 export default class Welcome extends Component {
   constructor(props) {
@@ -51,7 +52,7 @@ const styles = StyleSheet.create({
   },
   image: {
     width: Dimensions.get('window').width,
-    height: Dimensions.get('window').height,
+    height: realHeight,
     position: 'absolute',
     flex: 1,
     alignItems: 'center',

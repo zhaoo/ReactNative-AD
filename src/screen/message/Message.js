@@ -1,11 +1,10 @@
 import React, {Component} from 'react';
-import {View, StyleSheet, Dimensions, FlatList} from 'react-native';
+import {View, StyleSheet, FlatList} from 'react-native';
 import {ListItem} from 'react-native-elements';
 import NavBar from '~/component/NavBar';
 import {getActivityList} from '~/api/home';
 import {parseHtml, parseTime} from '~/utils/parse';
-
-const {height} = Dimensions.get('window');
+import {realHeight} from '~/utils/height';
 
 export default class Message extends Component {
   constructor(props) {
@@ -83,6 +82,6 @@ export default class Message extends Component {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#f0f3f6',
-    height: height - 49,
+    height: realHeight,
   },
 });

@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
-import {View, StyleSheet, Dimensions, ToastAndroid} from 'react-native';
-import {PricingCard} from 'react-native-elements';
+import {View, StyleSheet, ToastAndroid, FlatList} from 'react-native';
+import {PricingCard, ListItem} from 'react-native-elements';
 import DialogInput from 'react-native-dialog-input';
 import NavBar from '~/component/NavBar';
-import {profit, withdraw} from '~/api/wallet';
-
-const {height} = Dimensions.get('window');
+import {profit, withdraw, details} from '~/api/wallet';
+import {parseTime} from '~/utils/parse';
+import {realHeight} from '~/utils/height';
 
 export default class Wallet extends Component {
   constructor(props) {
@@ -13,6 +13,8 @@ export default class Wallet extends Component {
     this.state = {
       mount: 0,
       showWithdraw: false,
+      list: [],
+      refreshing: false,
     };
   }
 
@@ -20,9 +22,15 @@ export default class Wallet extends Component {
     this.getData();
   };
 
+  onRefresh = async () => {
+    this.getData();
+  };
+
   getData = async () => {
     const res = await profit();
     this.setState({mount: res.data.mount});
+    const listRes = await details({page: 1, limit: 10});
+    this.setState({list: listRes.data.items});
   };
 
   onWithdraw = async mount => {
@@ -82,8 +90,29 @@ export default class Wallet extends Component {
     );
   }
 
-  renderCharts() {
-    return <View />;
+  renderList() {
+    const {list, refreshing} = this.state;
+    return (
+      <FlatList
+        style={styles.list}
+        data={list}
+        keyExtractor={(item, index) => item.id.toString()}
+        refreshing={refreshing}
+        onRefresh={() => {
+          this.onRefresh();
+        }}
+        renderItem={({item, index}) => (
+          <ListItem
+            leftIcon={{name: 'coin', type: 'material-community'}}
+            chevron
+            title={parseTime(item.recordTime, '{y}-{m}-{d} {h}:{m}')}
+            rightTitle={
+              (item.amount > 0 ? '+ ' : '- ') + Math.abs(item.amount) + ' 元'
+            }
+          />
+        )}
+      />
+    );
   }
 
   render() {
@@ -92,7 +121,7 @@ export default class Wallet extends Component {
         {this.renderNavNar()}
         {this.renderProfit()}
         {this.renderWithdraw()}
-        {this.renderCharts()}
+        {this.renderList()}
       </View>
     );
   }
@@ -101,6 +130,13 @@ export default class Wallet extends Component {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#f0f3f6',
-    height: height,
+    height: realHeight,
+  },
+  list: {
+    marginLeft: 15,
+    marginRight: 15,
+    marginBottom: 15,
+    borderWidth: 1,
+    borderColor: '#e1e8ee',
   },
 });

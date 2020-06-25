@@ -14,3 +14,11 @@ export function withdraw(data) {
     data,
   });
 }
+
+export function details(data) {
+  return request({
+    url: '/wallet/details',
+    method: 'get',
+    data,
+  });
+}

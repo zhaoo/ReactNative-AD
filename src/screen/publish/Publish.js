@@ -1,11 +1,5 @@
 import React, {Component} from 'react';
-import {
-  View,
-  ScrollView,
-  StyleSheet,
-  Dimensions,
-  ToastAndroid,
-} from 'react-native';
+import {View, ScrollView, StyleSheet, ToastAndroid} from 'react-native';
 import {
   ListItem,
   CheckBox,
@@ -21,8 +15,20 @@ import NavBar from '~/component/NavBar';
 import Panel from '~/component/Panel';
 import Map from './component/Map';
 import {parseTime} from '~/utils/parse';
-import {createOrder} from '~/api/order';
+import {createOrder, getPrice} from '~/api/order';
 import moment from 'moment';
+import Card from '~/component/Card';
+import {windowHeight} from '~/utils/height';
+
+const timeList = [
+  ['00:00', '06:59'],
+  ['07:00', '09:59'],
+  ['10:00', '15:59'],
+  ['16:00', '16:59'],
+  ['17:00', '19:59'],
+  ['20:00', '20:59'],
+  ['21:00', '23:59'],
+];
 
 export default class Publish extends Component {
   constructor(props) {
@@ -32,20 +38,20 @@ export default class Publish extends Component {
         valueList: [],
         startDate: new Date(),
         endDate: new Date(),
-        startTime: new Date(
-          new Date(new Date().toLocaleDateString()).getTime(),
-        ),
-        endTime: new Date(
-          new Date(new Date().toLocaleDateString()).getTime() +
-            24 * 60 * 60 * 1000 -
-            1,
-        ),
+        startTime: moment()
+          .startOf('day')
+          .valueOf(),
+        endTime:
+          moment()
+            .startOf('day')
+            .valueOf() - 1,
         rate: 5,
         num: 100,
         price: 1,
         scope: 5,
         latitude: 30.2236,
         longitude: 120.0332,
+        priceList: [],
       },
       address: '选择投放位置',
       showContent: false,
@@ -55,8 +61,69 @@ export default class Publish extends Component {
       showEndTimePicker: false,
       showNum: false,
       showMap: false,
+      showPrice: false,
+      showHelp: false,
     };
   }
+
+  resetState = () => {
+    this.setState({
+      form: {
+        valueList: [],
+        startDate: new Date(),
+        endDate: new Date(),
+        startTime: moment()
+          .startOf('day')
+          .valueOf(),
+        endTime:
+          moment()
+            .startOf('day')
+            .valueOf() - 1,
+        rate: 5,
+        num: 100,
+        scope: 5,
+        latitude: 30.2236,
+        longitude: 120.0332,
+        priceList: [],
+      },
+      address: '选择投放位置',
+      showContent: false,
+      showStartDatePicker: false,
+      showEndDatePicker: false,
+      showStartTimePicker: false,
+      showEndTimePicker: false,
+      showNum: false,
+      showMap: false,
+      showPrice: false,
+      showHelp: false,
+    });
+    this.getPrice();
+  };
+
+  componentDidMount = () => {
+    this.getPrice();
+  };
+
+  getPrice = async () => {
+    const res = await getPrice();
+    const maxPrice = Math.max.apply(null, res.data.revenue);
+    this.setState({
+      form: {
+        ...this.state.form,
+        priceList: res.data.revenue,
+        price: maxPrice,
+      },
+    });
+    //根据时间段拿钱
+    // const nowHour = new Date().getHours();
+    // let i = timeList.length - 1;
+    // for (i; i >= 0; i--) {
+    //   const hour = timeList[i][0].split(':')[0];
+    //   if (nowHour > hour) {
+    //     break;
+    //   }
+    // }
+  };
 
   onSubmit = async () => {
     const {form} = this.state;
@@ -74,6 +141,7 @@ export default class Publish extends Component {
       this.props.navigation.navigate('Pay', {
         orderId: res.data.id,
       });
+      this.resetState();
     }
   };
 
@@ -370,14 +438,50 @@ export default class Publish extends Component {
   }
 
   renderPrice() {
-    const {price} = this.state.form;
+    const {price, num} = this.state.form;
     return (
-      <ListItem
-        title="广告单价"
-        leftIcon={{name: 'attach-money'}}
-        chevron
-        rightTitle={price + '元'}
-      />
+      <View>
+        <ListItem
+          title="广告单价"
+          leftIcon={{name: 'attach-money'}}
+          chevron
+          bottomDivider
+          rightTitle={price + '元'}
+          onPress={() => {
+            this.setState({
+              showPrice: true,
+            });
+          }}
+        />
+        <ListItem
+          title="合计总价"
+          leftIcon={{name: 'credit-card'}}
+          chevron
+          rightTitle={price * num + '元'}
+        />
+      </View>
+    );
+  }
+
+  renderPriceOverlay() {
+    const {showPrice} = this.state;
+    const {priceList} = this.state.form;
+    return (
+      <Overlay
+        isVisible={showPrice}
+        onBackdropPress={() => this.setState({showPrice: false})}>
+        <View>
+          <Text style={styles.priceTitle}>价目表</Text>
+          {priceList &&
+            priceList.map((item, i) => (
+              <ListItem
+                title={timeList[i][0] + ' - ' + timeList[i][1]}
+                rightTitle={'¥ ' + item}
+                bottomDivider
+              />
+            ))}
+        </View>
+      </Overlay>
     );
   }
 
@@ -402,6 +506,23 @@ export default class Publish extends Component {
           rightElement={this.renderScopeSlider()}
         />
       </View>
+    );
+  }
+
+  renderMapOverlay() {
+    const {latitude, longitude, address} = this.state.form;
+    const {showMap} = this.state;
+    return (
+      <Overlay
+        isVisible={showMap}
+        onBackdropPress={() => this.setState({showMap: false})}>
+        <Map
+          latitude={latitude}
+          longitude={longitude}
+          setAddress={this.setAddress.bind(this)}
+          handleChangeMap={this.handleChangeMap.bind(this)}
+        />
+      </Overlay>
     );
   }
 
@@ -430,23 +551,6 @@ export default class Publish extends Component {
     );
   }
 
-  renderMapOverlay() {
-    const {latitude, longitude, address} = this.state.form;
-    const {showMap} = this.state;
-    return (
-      <Overlay
-        isVisible={showMap}
-        onBackdropPress={() => this.setState({showMap: false})}>
-        <Map
-          latitude={latitude}
-          longitude={longitude}
-          setAddress={this.setAddress.bind(this)}
-          handleChangeMap={this.handleChangeMap.bind(this)}
-        />
-      </Overlay>
-    );
-  }
-
   renderSubmit() {
     return (
       <ActionButton
@@ -461,10 +565,29 @@ export default class Publish extends Component {
     );
   }
 
+  renderHelp() {
+    const {showHelp} = this.state;
+    return (
+      <Overlay
+        isVisible={showHelp}
+        onBackdropPress={() => this.setState({showHelp: false})}>
+        <Card title="计费说明">
+          <Text style={styles.helpText}>
+            因发布广告和审核广告存在时差，请提前完成广告发布，支付时按投放区域和时段进行预收，投放完成按照实际投放进行计费，未用完费用将会退回至您的付款账户。
+          </Text>
+        </Card>
+      </Overlay>
+    );
+  }
+
   render() {
     return (
       <View style={styles.container}>
-        <NavBar title="发布" />
+        <NavBar
+          title="发布"
+          rightIcon="help"
+          rightPress={() => this.setState({showHelp: !this.state.showHelp})}
+        />
         <ScrollView>
           <Panel>
             {this.renderValueList()}
@@ -483,9 +606,13 @@ export default class Publish extends Component {
             {this.renderPlayList()}
             {this.renderPlayInput()}
           </Panel>
-          <Panel>{this.renderPrice()}</Panel>
+          <Panel>
+            {this.renderPrice()}
+            {this.renderPriceOverlay()}
+          </Panel>
         </ScrollView>
         {this.renderSubmit()}
+        {this.renderHelp()}
       </View>
     );
   }
@@ -494,7 +621,7 @@ export default class Publish extends Component {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#f0f3f6',
-    height: Dimensions.get('window').height - 49,
+    height: windowHeight,
   },
   checkBox: {
     borderColor: '#fff',
@@ -539,5 +666,15 @@ const styles = StyleSheet.create({
     fontSize: 16,
     marginRight: 5,
     color: '#888',
+  },
+  priceTitle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginBottom: 10,
+    marginTop: 10,
+  },
+  helpText: {
+    marginTop: 5,
   },
 });

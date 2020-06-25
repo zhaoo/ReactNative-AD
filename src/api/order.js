@@ -43,3 +43,10 @@ export function deleteOrder(orderId) {
     method: 'delete',
   });
 }
+
+export function getPrice() {
+  return request({
+    url: '/system/revenue',
+    method: 'get',
+  });
+}

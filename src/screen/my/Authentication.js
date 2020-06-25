@@ -1,10 +1,15 @@
 import React, {Component} from 'react';
-import {View, Dimensions, StyleSheet, ToastAndroid} from 'react-native';
+import {View, StyleSheet, ToastAndroid} from 'react-native';
 import {Text, Divider, ListItem, Button} from 'react-native-elements';
-import {authentication} from '~/api/user';
+import {authentication, uploadCardImage} from '~/api/user';
 import NavBar from '~/component/NavBar';
 import DialogInput from 'react-native-dialog-input';
 import {parseUser} from '~/utils/parse';
+import ImagePicker from 'react-native-image-crop-picker';
+import CustomAlertDialog from '~/component/CustomAlertDialog';
+import {realHeight} from '~/utils/height';
+
+const photoType = ['相册', '拍照'];
 
 export default class Authentication extends Component {
   constructor(props) {
@@ -15,9 +20,11 @@ export default class Authentication extends Component {
         realname: navigation.getParam('realname'),
         idCard: navigation.getParam('idCard'),
         status: navigation.getParam('status'),
+        idCardPreImg: '',
       },
       showRealname: false,
       showIdCard: false,
+      showPhoto: false,
     };
   }
 
@@ -29,6 +36,42 @@ export default class Authentication extends Component {
       this.props.navigation.goBack();
     }
   };
+
+  album() {
+    ImagePicker.openPicker({
+      width: 800,
+      height: 600,
+      cropping: true,
+      cropperCircleOverlay: true,
+      mediaType: 'photo',
+    }).then(image => {
+      uploadCardImage(image).then(res => {
+        if (res.code === 20000) {
+          this.setState({
+            form: {...this.state.form, idCardPreImg: res.data.relativeAddress},
+          });
+          ToastAndroid.show(res.message, ToastAndroid.SHORT);
+        }
+      });
+    });
+  }
+
+  camera() {
+    ImagePicker.openCamera({
+      width: 800,
+      height: 600,
+      cropping: true,
+    }).then(image => {
+      uploadCardImage(image).then(res => {
+        if (res.code === 20000) {
+          this.setState({
+            form: {...this.state.form, idCardPreImg: res.data.relativeAddress},
+          });
+          ToastAndroid.show(res.message, ToastAndroid.SHORT);
+        }
+      });
+    });
+  }
 
   renderNavBar() {
     return (
@@ -44,7 +87,7 @@ export default class Authentication extends Component {
     const {form} = this.state;
     return (
       <View>
-        <View style={styles.card}>
+        <View style={statusCard(form.status)}>
           <View style={styles.textContainer}>
             <Text style={(styles.textColor, styles.textStatus)}>
               {parseUser(form.status)}
@@ -99,7 +142,9 @@ export default class Authentication extends Component {
           leftIcon={{name: 'photo'}}
           bottomDivider
           chevron
-          onPress={() => {}}
+          onPress={() => {
+            this.setState({showPhoto: !this.state.showPhoto});
+          }}
         />
         <Button
           title="提交"
@@ -156,6 +201,37 @@ export default class Authentication extends Component {
     );
   }
 
+  renderPhoto() {
+    const {showPhoto} = this.state;
+    return (
+      <CustomAlertDialog
+        entityList={photoType}
+        callback={i => {
+          this.setState({
+            type: i,
+            typeName: photoType[i],
+          });
+          switch (i) {
+            case 0:
+              this.album();
+              break;
+            case 1:
+              this.camera();
+              break;
+            default:
+              break;
+          }
+        }}
+        show={showPhoto}
+        closeModal={show => {
+          this.setState({
+            showPhoto: show,
+          });
+        }}
+      />
+    );
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -163,15 +239,30 @@ export default class Authentication extends Component {
         {this.renderCard()}
         {this.renderForm()}
         {this.renderInput()}
+        {this.renderPhoto()}
       </View>
     );
   }
 }
 
+const statusCard = status => {
+  const color = status === 'normal' ? '#67C23A' : '#F56C6C';
+  return {
+    backgroundColor: color,
+    height: 200,
+    borderRadius: 15,
+    margin: 10,
+    marginTop: 20,
+    marginBottom: 20,
+    padding: 25,
+    justifyContent: 'space-between',
+  };
+};
+
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#f0f3f6',
-    height: Dimensions.get('window').height,
+    height: realHeight,
   },
   card: {
     backgroundColor: '#409EFF',

@@ -81,3 +81,35 @@ export function authInfo() {
     method: 'get',
   });
 }
+
+export function uploadAvatar(image) {
+  let file = {
+    uri: image.path,
+    type: image.mime,
+    name: image.modificationDate,
+  };
+  let formData = new FormData();
+  formData.append('img', file);
+  return request({
+    url: '/file/avatar',
+    method: 'post',
+    headers: {'Content-Type': 'multipart/form-data'},
+    data: formData,
+  });
+}
+
+export function uploadCardImage(image) {
+  let file = {
+    uri: image.path,
+    type: image.mime,
+    name: image.modificationDate,
+  };
+  let formData = new FormData();
+  formData.append('img', file);
+  return request({
+    url: '/file/card',
+    method: 'post',
+    headers: {'Content-Type': 'multipart/form-data'},
+    data: formData,
+  });
+}

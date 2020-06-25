@@ -544,6 +544,10 @@
         "source": "/Users/zhaoo/.gradle/caches/transforms-2/files-2.1/37a6ef83210741d519b846c4e130a1ce/res/drawable-xxxhdpi-v4/abc_ic_star_half_black_16dp.png"
     },
     {
+        "merged": "/Users/zhaoo/Desktop/project/ad/adApp/android/app/build/intermediates/res/merged/release/mipmap-ldpi_ic_launcher.png.flat",
+        "source": "/Users/zhaoo/Desktop/project/ad/adApp/android/app/src/main/res/mipmap-ldpi/ic_launcher.png"
+    },
+    {
         "merged": "/Users/zhaoo/Desktop/project/ad/adApp/android/app/build/intermediates/res/merged/release/drawable_abc_list_divider_material.xml.flat",
         "source": "/Users/zhaoo/.gradle/caches/transforms-2/files-2.1/37a6ef83210741d519b846c4e130a1ce/res/drawable/abc_list_divider_material.xml"
     },
@@ -1256,12 +1260,12 @@
         "source": "/Users/zhaoo/.gradle/caches/transforms-2/files-2.1/37a6ef83210741d519b846c4e130a1ce/res/drawable-xxhdpi-v4/abc_btn_radio_to_on_mtrl_015.png"
     },
     {
-        "merged": "/Users/zhaoo/Desktop/project/ad/adApp/android/app/build/intermediates/res/merged/release/mipmap-xhdpi_ic_launcher_round.png.flat",
-        "source": "/Users/zhaoo/Desktop/project/ad/adApp/android/app/src/main/res/mipmap-xhdpi/ic_launcher_round.png"
-    },
-    {
         "merged": "/Users/zhaoo/Desktop/project/ad/adApp/android/app/build/intermediates/res/merged/release/drawable_abc_cab_background_top_material.xml.flat",
         "source": "/Users/zhaoo/.gradle/caches/transforms-2/files-2.1/37a6ef83210741d519b846c4e130a1ce/res/drawable/abc_cab_background_top_material.xml"
+    },
+    {
+        "merged": "/Users/zhaoo/Desktop/project/ad/adApp/android/app/build/intermediates/res/merged/release/mipmap-xhdpi_ic_launcher_round.png.flat",
+        "source": "/Users/zhaoo/Desktop/project/ad/adApp/android/app/src/main/res/mipmap-xhdpi/ic_launcher_round.png"
     },
     {
         "merged": "/Users/zhaoo/Desktop/project/ad/adApp/android/app/build/intermediates/res/merged/release/drawable-hdpi-v4_abc_btn_check_to_on_mtrl_015.png.flat",
@@ -2014,6 +2018,10 @@
     {
         "merged": "/Users/zhaoo/Desktop/project/ad/adApp/android/app/build/intermediates/res/merged/release/drawable-xxhdpi-v4_ucrop_ic_next.png.flat",
         "source": "/Users/zhaoo/.gradle/caches/transforms-2/files-2.1/a61f42dcc81853fdf653f0e8370c2429/res/drawable-xxhdpi-v4/ucrop_ic_next.png"
+    },
+    {
+        "merged": "/Users/zhaoo/Desktop/project/ad/adApp/android/app/build/intermediates/res/merged/release/mipmap-ldpi_ic_launcher_round.png.flat",
+        "source": "/Users/zhaoo/Desktop/project/ad/adApp/android/app/src/main/res/mipmap-ldpi/ic_launcher_round.png"
     },
     {
         "merged": "/Users/zhaoo/Desktop/project/ad/adApp/android/app/build/intermediates/res/merged/release/drawable-mdpi-v4_ucrop_ic_crop.png.flat",

@@ -4,8 +4,9 @@ import {Icon, Text} from 'react-native-elements';
 import Swiper from 'react-native-swiper';
 import NavBar from '~/component/NavBar';
 import {getShuffingList} from '~/api/home';
+import {windowHeight} from '~/utils/height';
 
-const {width, height} = Dimensions.get('window');
+const {width} = Dimensions.get('window');
 
 export default class Home extends Component {
   constructor(props) {
@@ -148,7 +149,7 @@ const styles = StyleSheet.create({
   },
   container: {
     backgroundColor: '#f0f3f6',
-    height: height - 49,
+    height: windowHeight,
   },
   menuContainer: {
     margin: 10,

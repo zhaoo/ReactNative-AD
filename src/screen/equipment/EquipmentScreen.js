@@ -1,12 +1,7 @@
 import React, {Component} from 'react';
-import {
-  View,
-  StyleSheet,
-  Dimensions,
-  Text,
-  TouchableNativeFeedback,
-} from 'react-native';
+import {View, StyleSheet, Text, TouchableNativeFeedback} from 'react-native';
 import NavBar from '../../component/NavBar';
+import {windowHeight} from '~/utils/height';
 
 class EquipmentScreen extends Component {
   render() {
@@ -36,7 +31,7 @@ class EquipmentScreen extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    height: Dimensions.get('window').height - 49,
+    height: windowHeight,
   },
   cardContainer: {
     flex: 1,

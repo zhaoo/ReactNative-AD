@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
-import {View, FlatList, Text, StyleSheet, Dimensions} from 'react-native';
+import {View, FlatList, Text, StyleSheet} from 'react-native';
 import {Divider} from 'react-native-elements';
 import {Geolocation} from 'react-native-baidu-map';
 import {getOrderList} from '~/api/order';
 import NavBar from '~/component/NavBar';
+import {realHeight} from '~/utils/height';
 
 export default class PlanList extends Component {
   constructor(props) {
@@ -83,7 +84,7 @@ const styles = StyleSheet.create({
     padding: 15,
   },
   container: {
-    height: Dimensions.get('window').height,
+    height: realHeight,
   },
   valueText: {
     fontSize: 18,

@@ -1,11 +1,5 @@
 import React, {Component} from 'react';
-import {
-  View,
-  StyleSheet,
-  Dimensions,
-  FlatList,
-  ToastAndroid,
-} from 'react-native';
+import {View, StyleSheet, FlatList, ToastAndroid} from 'react-native';
 import NavBar from '../../component/NavBar';
 import Panel from '../../component/Panel';
 import DateTimePicker from '@react-native-community/datetimepicker';
@@ -16,6 +10,7 @@ import {Overlay as MapOverlay} from 'react-native-baidu-map';
 const {Marker} = MapOverlay;
 import {getEquipmentListByUid} from '../../api/equipment';
 import {bindEquipment} from '../../api/equipment';
+import {windowHeight} from '~/utils/height';
 
 class BindEquipmentScreen extends Component {
   constructor(props) {
@@ -194,7 +189,7 @@ class BindEquipmentScreen extends Component {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#f0f3f6',
-    height: Dimensions.get('window').height + 80,
+    height: windowHeight,
   },
   map: {
     width: '100%',

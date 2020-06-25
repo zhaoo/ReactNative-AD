@@ -10,6 +10,7 @@ import {Text, Button, Input} from 'react-native-elements';
 import NavBar from '~/component/NavBar';
 import Card from '~/component/Card';
 import {getOrder, refundOrder} from '~/api/order';
+import {realHeight} from '~/utils/height';
 
 export default class Refund extends Component {
   constructor(props) {
@@ -108,7 +109,7 @@ export default class Refund extends Component {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#f0f3f6',
-    height: Dimensions.get('window').height,
+    height: realHeight,
   },
   bottom: {
     height: 50,

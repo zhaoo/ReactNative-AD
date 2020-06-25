@@ -8,6 +8,8 @@ import NavBar from '~/component/NavBar';
 import {update} from '~/api/user';
 import {parseTime, parseGender} from '~/utils/parse';
 import ImagePicker from 'react-native-image-crop-picker';
+import {uploadAvatar} from '../../api/user';
+import {fetchUserInfo} from '~/action';
 
 const genderType = ['male', 'female', 'unknown'];
 const avatarType = ['相册', '拍照'];
@@ -28,6 +30,7 @@ export default class Profile extends Component {
     const {user} = this.state;
     update(user).then(res => {
       if (res.code === 20000) {
+        fetchUserInfo();
         ToastAndroid.show(res.message, ToastAndroid.SHORT);
       }
     });
@@ -216,10 +219,12 @@ export default class Profile extends Component {
       cropperCircleOverlay: true,
       mediaType: 'photo',
     }).then(image => {
-      console.log(image);
-      let data = new FormData();
-      let file = {url: image.path, type: 'multipart/form-data', name: 'img'};
-      data.append('imgFile', file);
+      uploadAvatar(image).then(res => {
+        if (res.code === 20000) {
+          fetchUserInfo();
+          ToastAndroid.show(res.message, ToastAndroid.SHORT);
+        }
+      });
     });
   }
 
@@ -229,7 +234,12 @@ export default class Profile extends Component {
       height: 300,
       cropping: true,
     }).then(image => {
-      console.log(image);
+      uploadAvatar(image).then(res => {
+        if (res.code === 20000) {
+          fetchUserInfo();
+          ToastAndroid.show(res.message, ToastAndroid.SHORT);
+        }
+      });
     });
   }
 

@@ -11,6 +11,8 @@ export default class OrderList extends Component {
     this.state = {
       list: [],
       refreshing: false,
+      page: 1,
+      limit: 15,
     };
   }
 
@@ -19,12 +21,24 @@ export default class OrderList extends Component {
   }
 
   getList = async () => {
-    const res = await getOrderList({page: 1, limit: 10});
-    this.setState({list: res.data.items});
+    const {page, limit} = this.state;
+    const res = await getOrderList({page: page, limit: limit});
+    if (res.code === 20000) {
+      this.setState({list: res.data.items});
+    }
   };
 
   onRefresh = async () => {
     this.getList();
+  };
+
+  onEndReached = async () => {
+    const {page, limit, list} = this.state;
+    await this.setState({page: page + 1});
+    const res = await getOrderList({page: page, limit: limit});
+    if (res.code === 20000) {
+      this.setState({list: list.concat(res.data.items)});
+    }
   };
 
   renderNavBar() {
@@ -49,6 +63,10 @@ export default class OrderList extends Component {
         onRefresh={() => {
           this.onRefresh();
         }}
+        onEndReached={() => {
+          this.onEndReached();
+        }}
+        onEndReachedThreshold={1}
         renderItem={({item, index}) => (
           <ListItem
             leftIcon={{name: 'work'}}

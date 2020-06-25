@@ -26,6 +26,8 @@ export async function fetchLogout(navigation) {
 }
 
 export async function fetchUserInfo() {
-  const res = await getInfo(await getToken());
-  return res.data;
+  const token = await getToken();
+  const res = await getInfo(token);
+  const user = res.data;
+  store.dispatch(loginAction(token, user));
 }

@@ -12,6 +12,7 @@ import NavBar from '~/component/NavBar';
 import Card from '~/component/Card';
 import {parseTime} from '~/utils/parse';
 import {getOrder, payNotify} from '~/api/order';
+import {realHeight} from '~/utils/height';
 
 export default class Pay extends Component {
   constructor(props) {
@@ -128,7 +129,7 @@ export default class Pay extends Component {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#f0f3f6',
-    height: Dimensions.get('window').height,
+    height: realHeight,
   },
   bottom: {
     height: 50,
