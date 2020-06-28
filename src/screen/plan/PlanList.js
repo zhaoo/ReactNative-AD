@@ -60,8 +60,8 @@ export default class PlanList extends Component {
               时间段：{item.startDate} ~ {item.endDate} ({item.startTime} ~{' '}
               {item.endTime})
             </Text>
-            <Text style={styles.userText}>投放人：{item.uid}</Text>
-            <Text style={styles.localText}>投放位置：{item.uid}</Text>
+            {/* <Text style={styles.userText}>投放人：{item.uid}</Text>
+            <Text style={styles.localText}>投放位置：{item.uid}</Text> */}
             <Divider style={styles.divider} />
           </View>
         )}
