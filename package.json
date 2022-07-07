@@ -45,7 +45,7 @@
     "eslint": "^6.5.1",
     "jest": "^24.9.0",
     "metro-react-native-babel-preset": "^0.56.0",
-    "moment": "^2.25.3",
+    "moment": "^2.29.4",
     "react-test-renderer": "16.9.0"
   },
   "jest": {
